@@ -1,6 +1,9 @@
 ------------------GROUP_16_ASSIGNMENT_2------------------
 	Created by Blain Cribb and Jerry Yang
 
+SCCharts code is found in "SCCharts/Assignment2"
+C code is found in "software/Assignment2"
+
 To get the program running:
 
 	1. Open the QUARTUS folder
@@ -8,8 +11,6 @@ To get the program running:
 	3. Open device programmer and program the board
 	4. Open NIOS with the workspace "D:\group_16"
 	5. Run as a NIOS II device
-
-SCCharts
 
 Pacemaker.c is the main file.
 system.h is our generated hardware header.
