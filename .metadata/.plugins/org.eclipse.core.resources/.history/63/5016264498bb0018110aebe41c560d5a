@@ -1,0 +1,7 @@
+// Timeout values for pacemaker
+#define AVI_VALUE 300
+#define AEI_VALUE 400
+#define PVARP_VALUE 10
+#define VRP_VALUE 10
+#define LRI_VALUE 1000
+#define URI_VALUE 500

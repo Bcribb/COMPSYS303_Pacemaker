@@ -1,0 +1,162 @@
+scchart Assignment2 {
+ 	input signal VSense, ASense, LRITO, PVARPTO, URITO, AEITO, AVITO, VRPTO, ERROR;
+ 	output signal VPase, APase, test;
+ 	output signal LRI_start, LRI_stop;
+   	output signal URI_start, URI_stop;
+	output signal VRP_start, VRP_stop;
+	output signal AVI_start, AVI_stop;
+	output signal AEI_start, AEI_stop;
+	output signal PVARP_start, PVARP_stop;
+
+ 	region main:
+ 	
+ 	initial state top {
+ 	  
+ 	   	signal LRI_ex;
+ 	   	signal URI_ex;
+ 		signal VRP_ex;
+ 		signal AVI_ex;
+ 		signal AEI_ex;
+ 		signal PVARP_ex;
+ 		
+ 		//bool AVI_extend = false;
+ 		
+ 		//-----------------------TIMERS----------------------------
+ 		
+ 		
+ 		region VRP_timer: 		
+ 		initial state idle
+		--> timer with VRP_start;
+		state timer
+		--> idle with VRPTO / VRP_ex;
+		
+		region PVARP_timer: 		
+ 		initial state idle
+		--> timer with PVARP_start;
+		state timer
+		--> idle with PVARPTO / PVARP_ex;
+		
+		//Atrioventricular Interval Timer:
+		//		Starts on ASense or APase
+ 		region AVI_timer: 		
+ 		initial state idle
+		--> timer with AVI_start;
+		state timer
+		--> idle with AVI_stop
+		--> waitURI with AVITO; //TODO: WHAT SHOULD THE OUTPUT BE?
+		state waitURI
+		--> idle; // immediate with AVI_extend == false / AVI_ex;
+		
+		//Atrial Escape Interval timer:
+		//		Starts on VSence or VPase, back to idle on timeout or AEI_stop
+		region AEI_timer:
+		initial state idle
+		--> timer with AEI_start;
+		state timer
+		--> idle with AEI_stop
+		--> idle with AEITO / AEI_ex;
+		
+		// Upper Rate Interval Timer
+		region URI_timer: 		
+ 		initial state idle
+		--> timer immediate with URI_start;
+		state timer
+		--> idle with URITO / URI_ex
+		--> idle with URI_stop;
+		
+		region LRI_timer: 		
+ 		initial state idle
+		--> timer immediate with LRI_start;
+		state timer
+		--> idle with LRITO / LRI_ex
+		--> idle with LRI_stop;
+		
+		//------------------------------LOGIC-----------------------------------
+		
+		region VRP: 		
+ 		initial state idle
+		--> connectorOne with VSense
+		--> connectorOne with VPase;
+		connector state connectorOne
+		--> waitVRP immediate with / VRP_start;
+		state waitVRP
+		--> connectorTwo with VSense
+		--> idle with VRP_ex;
+		connector state connectorTwo
+		--> waitVRP immediate;
+		
+		region AEI_AND_PVARP:
+		initial state idle
+		--> connectorOne with VSense
+		--> connectorOne with VPase;
+		connector state connectorOne
+		--> connectorTwo immediate with / AEI_start;
+		connector state connectorTwo
+		--> waitPVARP immediate with / PVARP_start;
+		state waitPVARP
+		--> waitAEI with PVARP_ex;
+		state waitAEI
+		--> idle with ASense / AEI_stop
+		--> idle with AEI_ex / APase;
+		
+		region AVI:
+		initial state idle
+		--> connectorOne with ASense
+		--> connectorOne with APase;
+		connector state connectorOne
+		--> waitAVI with /AVI_start;
+		state waitAVI
+		--> waitPVARP with VSense / AVI_stop 
+		--> waitPVARP with VPase / AVI_stop
+		--> waitPVARP with AVI_ex / VPase;
+		state waitPVARP
+		-->idle with PVARP_ex;
+		
+		region LRI: 		
+ 		initial state init
+		--> connectorOne with VSense
+		--> connectorOne with VPase;
+		connector state connectorOne
+		--> waitVRP immediate with / LRI_start;
+		state waitVRP
+		--> waitLRI with VRP_ex;
+		state waitLRI
+		--> connectorTwo with VSense
+		--> connectorThree with LRI_ex
+		--> connectorFour with VPase;
+		connector state connectorTwo
+		--> intState immediate with / LRI_stop;
+		connector state connectorThree
+		--> intState immediate with / VPase;
+		connector state connectorFour
+		--> intState immediate with / LRI_stop;
+		state intState
+		--> waitVRP immediate with VSense / LRI_start
+		--> waitVRP immediate with VPase / LRI_start;
+		
+		region URI: 		
+ 		initial state init
+		--> connectorOne with VSense
+		--> connectorOne with VPase;
+		connector state connectorOne
+		--> waitVRP immediate with / URI_start;
+		state waitVRP
+		--> waitURI;// with VRP_ex / AVI_extend = true;
+		state waitURI
+		--> connectorTwo with VSense
+		--> connectorThree with URI_ex;
+		connector state connectorTwo
+		--> connectorfour immediate with / URI_stop;
+		connector state connectorfour
+		--> intState;// immediate with / AVI_extend = false;
+		connector state connectorThree
+		--> intState;// immediate with / AVI_extend = false;
+		state intState
+		--> waitVRP immediate with VSense / URI_start
+		--> waitVRP immediate with VPase / URI_start;
+
+	}
+	o-> Error with ERROR;
+	
+	state Error;
+}

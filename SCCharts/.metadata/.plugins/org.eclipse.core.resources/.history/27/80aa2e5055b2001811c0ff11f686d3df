@@ -1,0 +1,40 @@
+scchart Assignment2 {
+ 	input signal VSense, LRITO, VRPTO, ERROR;
+ 	output signal VPase;
+
+ 	region main:
+ 	
+ 	initial state top {
+ 	  
+ 	   	signal LRI_start, LRI_ex, LRI_stop;
+ 		signal VRP_start, VRP_ex, VRP_stop;
+ 		
+ 		region VRP_timer: 		
+ 		initial state idle
+		--> timer with VRP_start;
+		state timer
+		--> idle with VRPTO / VRP_ex;
+		
+		region VRP: 		
+ 		initial state idle
+		--> connectorOne with VSense
+		--> connectorOne with VPase;
+		connector state connectorOne
+		--> waitVRP immediate with / VRP_start;
+		state waitVRP
+		--> connectorTwo with VSense
+		--> idle with VRP_ex;
+		connector state connectorTwo
+		--> waitVRP immediate;
+		
+		region LRI_timer: 		
+ 		initial state idle
+		--> timer with LRI_start;
+		state timer
+		--> idle with LRITO / LRI_ex
+		--> idle with LRI_stop;
+	}
+	o-> Error with ERROR;
+	
+	state Error;
+}

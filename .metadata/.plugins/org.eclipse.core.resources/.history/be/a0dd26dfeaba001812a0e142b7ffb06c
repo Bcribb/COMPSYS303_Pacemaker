@@ -1,0 +1,313 @@
+/*
+ * "Hello World" example.
+ *
+ * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
+ * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example
+ * designs. It runs with or without the MicroC/OS-II RTOS and requires a STDOUT
+ * device in your system's hardware.
+ * The memory footprint of this hosted application is ~69 kbytes by default
+ * using the standard reference design.
+ *
+ * For a reduced footprint version of this template, and an explanation of how
+ * to reduce the memory footprint for a given application, see the
+ * "small_hello_world" template.
+ *
+ */
+
+#include <stdio.h>
+#include <system.h>
+#include <altera_avalon_pio_regs.h>
+#include <sys/alt_alarm.h>
+#include <sys/alt_irq.h>
+#include "scchart.h"
+#include "timeouts.h"
+
+//------Defines--------
+int cycle = 0;
+
+
+//------BUTTONS--------
+int buttons = 0;
+void init_buttons_pio(void);
+void button_isr(void* context, alt_u32 id);
+
+
+//------LEDS-----------
+unsigned int ledOn[4] = {0, 0, 0, 0};
+unsigned int ledCounts[4] = {0, 0, 0, 0};
+
+//------TIMERS---------
+static alt_alarm URITIMER;
+static alt_alarm LRITIMER;
+static alt_alarm AEITIMER;
+static alt_alarm AVITIMER;
+static alt_alarm PVARPTIMER;
+static alt_alarm VRPTIMER;
+
+alt_u32 URI_isr(void* context);
+alt_u32 LRI_isr(void* context);
+alt_u32 AEI_isr(void* context);
+alt_u32 AVI_isr(void* context);
+alt_u32 PVARP_isr(void* context);
+alt_u32 VRP_isr(void* context);
+
+//------Functions------------
+void handle_timers(void);
+void handle_leds(void);
+
+/* DESCRIPTION: Initialize the interrupts for all buttons
+ * PARAMETER:   none
+ * RETURNS:     none
+ */
+void init_buttons_pio(void)
+{
+	// Create the buttons context
+	void* context_going_to_be_passed = (void*) &buttons;
+
+	// Clear and mask
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEYS_BASE, 0);
+	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(KEYS_BASE, 0x7);
+
+	// Start the buttons for interrupts
+	alt_irq_register(KEYS_IRQ, context_going_to_be_passed, button_isr);
+}
+
+
+
+/* DESCRIPTION: Handles the Atrial and ventricle button interrupt
+ * PARAMETER:   context - opaque reference to user data
+ *              id - hardware interrupt number for the device
+ * RETURNS:     none
+ */
+void button_isr(void* context, alt_u32 id)
+{
+	// NOTE:
+	// Cast context to volatile to avoid unwanted compiler optimization.
+	// Store the value in the Button's edge capture register in *context
+	volatile int* value = (volatile int*)context;
+
+	// Read buttons values then clear
+	(*value) = IORD_ALTERA_AVALON_PIO_EDGE_CAP(KEYS_BASE);
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEYS_BASE, 0);
+	printf("button: %i\n", *value);
+
+	if (*value & 0b1) {
+		// Then the right button is pushed (Ventricle)
+		VSense = 1;
+		ledOn[3] = 1;
+		ledCounts[3] = 0;
+	}
+	if (*value & 0b10) {
+		// Then the 2nd right button is pushed (Atrium)
+		ASense = 1;
+		ledOn[2] = 1;
+		ledCounts[2] = 0;
+	}
+}
+
+
+
+/* DESCRIPTION: Handles how long each LED should be on for
+ * PARAMETER:   none
+ * RETURNS:     none
+ */
+void handle_leds(void) {
+
+	// If the pacemaker is pasing, we should turn on leds
+	if(VPase == 1) {
+		ledOn[1] = 1;
+		VPase = 0;
+	}
+	if(APase == 1) {
+		ledOn[0] = 1;
+		APase = 0;
+	}
+
+
+	// If our rightmost LED is on, we count to 1000 then turn it off
+	if(ledOn[3] == 1) {
+		IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, IORD_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE) | 1);
+		if(ledCounts[3] == 1000) {
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, IORD_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE) & ~1);
+			ledCounts[3] = 0;
+			ledOn[3] = 0;
+		} else {
+			ledCounts[3]++;
+		}
+	}
+
+	// If our 2nd from right LED is on, we count to 1000 then turn it off
+	if(ledOn[2] == 1) {
+		IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, IORD_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE) | 2);
+		if(ledCounts[2] == 1000) {
+			ledCounts[2] = 0;
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, IORD_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE) & ~2);
+			ledOn[2] = 0;
+		} else {
+			ledCounts[2]++;
+		}
+	}
+
+	// If our third from right LED is on, we count to 1000 then turn it off
+	if(ledOn[1] == 1) {
+		IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, IORD_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE) | 4);
+		if(ledCounts[1] == 1000) {
+			ledCounts[1] = 0;
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, IORD_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE) & ~4);
+			ledOn[1] = 0;
+		} else {
+			ledCounts[1]++;
+		}
+	}
+
+	// If our fourth form right LED is on count to 1000 then turn it off
+	if(ledOn[0] == 1) {
+		if(ledCounts[0] == 1000) {
+			ledCounts[0] = 0;
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, IORD_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE) & ~8);
+			ledOn[0] = 0;
+		} else {
+			ledCounts[0]++;
+		}
+	}
+}
+
+
+/* DESCRIPTION: Handles of turning on and off the timers
+ * PARAMETER:   none
+ * RETURNS:     none
+ */
+void handle_timers(void) {
+	// AVI
+	if(AVI_stop) {
+		printf("STOPPING AVI\n")
+		alt_alarm_stop(&AVITIMER);
+	}
+	if(AVI_start) {
+		printf("start avi\n");
+		void* timerContext = (void*) &AVITO;
+		alt_alarm_start(&AVITIMER, AVI_VALUE, AVI_isr, timerContext);
+	}
+
+	// PVARP
+	if(PVARP_stop) {
+		printf("STOPPING PVARP\n");
+		alt_alarm_stop(&PVARPTIMER);
+	}
+	if(PVARP_start) {
+		printf("starting pvarp\n");
+		void* timerContext = (void*) &PVARPTO;
+		alt_alarm_start(&PVARPTIMER, PVARP_VALUE, PVARP_isr, timerContext);
+	}
+
+	// VRP
+	if(VRP_stop) {
+		printf("STOPPING VRP\n");
+		alt_alarm_stop(&VRPTIMER);
+	}
+	if(VRP_start) {
+		printf("starting vrp\n");
+		void* timerContext = (void*) &VRPTO;
+		alt_alarm_start(&VRPTIMER, VRP_VALUE, VRP_isr, timerContext);
+	}
+
+	// AEI
+	if(AEI_stop) {
+		printf("STOPPING AEI\n");
+		alt_alarm_stop(&VRPTIMER);
+	}
+	if(AEI_start) {
+		printf("starting AEI\n");
+		void* timerContext = (void*) &AEITO;
+		alt_alarm_start(&AEITIMER, AEI_VALUE, AEI_isr, timerContext);
+	}
+
+}
+
+/* DESCRIPTION: Handles of different ISRs
+ * PARAMETER:   context
+ * RETURNS:     return the time for the next timer
+ */
+alt_u32 LRI_isr(void* context) {
+	printf("%d: ", cycle);
+	printf("LRI TIMESOUT\n");
+	char* timeout = (char*) context;
+	*timeout = 1;
+	return 0;
+}
+
+alt_u32 URI_isr(void* context) {
+	printf("%d: ", cycle);
+	printf("URI TIMESOUT\n");
+	char* timeout = (char*) context;
+	*timeout = 1;
+	return 0;
+}
+
+alt_u32 AVI_isr(void* context) {
+	VSense = 0;
+	printf("%d: ", cycle);
+	printf("AVI TIMESOUT\n");
+	char* timeout = (char*) context;
+	*timeout = 1;
+	return 0;
+}
+
+alt_u32 AEI_isr(void* context) {
+	printf("%d: ", cycle);
+	printf("AEI TIMESOUT\n");
+	printf("The value of APase is: \"%c\"\n", APase);
+	char* timeout = (char*) context;
+	*timeout = 1;
+	return 0;
+}
+
+alt_u32 PVARP_isr(void* context) {
+	printf("%d: ", cycle);
+	printf("PVARP TIMESOUT\n");
+	char* timeout = (char*) context;
+	*timeout = 1;
+	return 0;
+}
+
+alt_u32 VRP_isr(void* context) {
+	printf("%d: ", cycle);
+	printf("VRP TIMESOUT\n");
+	char* timeout = (char*) context;
+	*timeout = 1;
+	return 0;
+}
+
+int main(void) {
+	printf("Main Starts\n");
+
+	// Initialise program
+	reset();
+	init_buttons_pio();
+	int uiButtonsValue;
+
+	while(1) {
+//		uiButtonsValue = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
+//		if (uiButtonsValue & 0b1) {
+//			VSense = 0;
+//		} else {
+//			VSense = 1;
+//		}
+//
+//		if (uiButtonsValue & 0b10) {
+//			ASense = 0;
+//		} else {
+//			ASense = 1;
+//		}
+
+		tick();
+		// Turn on or off LEDS as needed
+		handle_leds();
+		handle_timers();
+		// Go through one cycle of the sccharts program
+		cycle++;
+
+		VSense, ASense, VPase, APase = 0;
+	}
+	return 0;
+}

@@ -1,0 +1,33 @@
+/*
+ * scchart.h
+ *
+ *  Created on: 16/09/2018
+ *      Author: bcri429
+ */
+#include "timeouts.h"
+
+#ifndef SCCHART_H_
+#define SCCHART_H_
+
+// Functions
+void reset();
+void tick();
+
+// Inputs
+extern char VSense;
+extern char Asense;
+extern char LRITO;
+extern char PVARPTO;
+extern char URITO;
+extern char AEITO;
+extern char AVITO;
+extern char VRPTO;
+extern char ERROR;
+
+
+// Outputs
+extern char VPase;
+extern char APase;
+
+
+#endif /* SCCHART_H_ */

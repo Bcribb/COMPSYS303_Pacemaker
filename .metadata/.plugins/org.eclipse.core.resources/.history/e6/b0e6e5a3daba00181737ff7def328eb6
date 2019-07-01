@@ -1,0 +1,48 @@
+/*
+ * scchart.h
+ *
+ *  Created on: 16/09/2018
+ *      Author: bcri429
+ */
+
+#ifndef SCCHART_H_
+#define SCCHART_H_
+
+// Functions
+void reset();
+void tick();
+
+// Timeouts
+extern char LRITO;
+extern char PVARPTO;
+extern char URITO;
+extern char AEITO;
+extern char AVITO;
+extern char VRPTO;
+
+// Signals
+extern char _Assignment2_local_LRI_start = 0;
+extern char _Assignment2_local_LRI_stop = 0;
+extern char _Assignment2_local_PVARP_start = 0;
+extern char _Assignment2_local_PVARP_stop = 0;
+extern char _Assignment2_local_URI_start = 0;
+extern char _Assignment2_local_URI_stop = 0;
+extern char _Assignment2_local_AEI_start = 0;
+extern char _Assignment2_local_AEI_stop = 0;
+extern char _Assignment2_local_AVI_start = 0;
+extern char _Assignment2_local_AVI_stop = 0;
+extern char _Assignment2_local_VRP_start = 0;
+extern char _Assignment2_local_VRP_stop = 0;
+
+// Inputs
+extern char VSense;
+extern char ASense;
+extern char ERROR;
+
+
+// Outputs
+extern char VPase;
+extern char APase;
+
+
+#endif /* SCCHART_H_ */

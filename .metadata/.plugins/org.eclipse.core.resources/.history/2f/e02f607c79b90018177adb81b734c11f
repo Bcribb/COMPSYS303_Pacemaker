@@ -1,0 +1,769 @@
+/*
+ * scchart.c
+ *
+ *  Created on: 16/09/2018
+ *      Author: bcri429
+ */
+/*****************************************************************************/
+/*                 G E N E R A T E D       C    C O D E                      */
+/*****************************************************************************/
+/* KIELER - Kiel Integrated Environment for Layout Eclipse RichClient        */
+/*                                                                           */
+/* http://www.informatik.uni-kiel.de/rtsys/kieler/                           */
+/* Copyright 2014 by                                                         */
+/* + Kiel University                                                         */
+/*   + Department of Computer Science                                        */
+/*     + Real-Time and Embedded Systems Group                                */
+/*                                                                           */
+/* This code is provided under the terms of the Eclipse Public License (EPL).*/
+/*****************************************************************************/
+char ERROR;
+char APase;
+char VSense;
+char ASense;
+char LRITO;
+char PVARPTO;
+char URITO;
+char AEITO;
+char AVITO;
+char VRPTO;
+char VPase;
+char _Assignment2_local_LRI_stop;
+char _Assignment2_local_URI_stop;
+char _Assignment2_local_VRP_stop;
+char _Assignment2_local_AVI_stop;
+char _Assignment2_local_AEI_stop;
+char _Assignment2_local_PVARP_stop;
+char _Assignment2_local_AVI_extend;
+char _Assignment2_local_LRI_start;
+char _Assignment2_local_LRI_ex;
+char _Assignment2_local_URI_start;
+char _Assignment2_local_URI_ex;
+char _Assignment2_local_VRP_start;
+char _Assignment2_local_VRP_ex;
+char _Assignment2_local_AVI_start;
+char _Assignment2_local_AVI_ex;
+char _Assignment2_local_AEI_start;
+char _Assignment2_local_AEI_ex;
+char _Assignment2_local_PVARP_start;
+char _Assignment2_local_PVARP_ex;
+char g0;
+char g1;
+char g2;
+char g3;
+char PRE_g3;
+char g4;
+char g5;
+char g6;
+char g7;
+char PRE_g7;
+char g8;
+char g9;
+char g10;
+char g11;
+char g12;
+char PRE_g12;
+char g13;
+char g14;
+char g15;
+char g16;
+char PRE_g16;
+char g17;
+char g18;
+char g19;
+char g20;
+char g21;
+char PRE_g21;
+char g22;
+char g23;
+char g24;
+char g25;
+char PRE_g25;
+char g26;
+char g27;
+char g28;
+char g29;
+char g30;
+char g31;
+char PRE_g31;
+char g32;
+char g33;
+char g34;
+char PRE_g34;
+char g35;
+char g36;
+char g37;
+char g38;
+char PRE_g38;
+char g39;
+char g40;
+char g41;
+char g42;
+char g43;
+char g44;
+char PRE_g44;
+char g45;
+char g46;
+char g47;
+char g48;
+char PRE_g48;
+char g49;
+char g50;
+char g51;
+char g52;
+char g53;
+char g54;
+char PRE_g54;
+char g55;
+char g56;
+char g57;
+char g58;
+char PRE_g58;
+char g59;
+char g60;
+char g61;
+char g62;
+char g63;
+char g64;
+char PRE_g64;
+char g65;
+char g66;
+char g67;
+char g68;
+char g69;
+char PRE_g69;
+char g70;
+char g71;
+char g72;
+char g73;
+char g74;
+char g75;
+char PRE_g75;
+char g76;
+char g77;
+char g78;
+char g79;
+char g79b;
+char g80;
+char PRE_g80;
+char g81;
+char g82;
+char g83;
+char PRE_g83;
+char g84;
+char g85;
+char g86;
+char g87;
+char g88;
+char g89;
+char g90;
+char g91;
+char PRE_g91;
+char g92;
+char g93;
+char g94;
+char g95;
+char g96;
+char PRE_g96;
+char g97;
+char g98;
+char g99;
+char g100;
+char PRE_g100;
+char g101;
+char g102;
+char g103;
+char g104;
+char g105;
+char g106;
+char g107;
+char g108;
+char g109;
+char PRE_g109;
+char g110;
+char g111;
+char g112;
+char g113;
+char g114;
+char PRE_g114;
+char g115;
+char g116;
+char g117;
+char PRE_g117;
+char g118;
+char g119;
+char g120;
+char g121;
+char PRE_g121;
+char g122;
+char g123;
+char g124;
+char g125;
+char g126;
+char g127;
+char g128;
+char g129;
+char PRE_g129;
+char g130;
+char g131;
+char g132;
+char g133;
+char g134;
+char PRE_g134;
+char g135;
+char g136;
+char g137;
+char g138;
+char PRE_g138;
+char g139;
+char g140;
+char g141;
+char g142;
+char PRE_g142;
+char g143;
+char g144;
+char g145;
+char g146;
+char g147;
+char g148;
+char PRE_g148;
+char g149;
+char g150;
+char g151;
+char g152;
+char PRE_g152;
+char g153;
+char g154;
+char g155;
+char g156;
+char PRE_g156;
+char g157;
+char g158;
+char g159;
+char _GO;
+char _cg6;
+char _cg4;
+char _cg8;
+char _cg9;
+char _cg15;
+char _cg13;
+char _cg17;
+char _cg18;
+char _cg27;
+char _cg24;
+char _cg22;
+char _cg26;
+char _cg32;
+char _cg28;
+char _cg29;
+char _cg40;
+char _cg37;
+char _cg35;
+char _cg39;
+char _cg41;
+char _cg52;
+char _cg47;
+char _cg45;
+char _cg49;
+char _cg50;
+char _cg62;
+char _cg57;
+char _cg55;
+char _cg59;
+char _cg60;
+char _cg72;
+char _cg73;
+char _cg65;
+char _cg70;
+char _cg67;
+char _cg71;
+char _cg89;
+char _cg76;
+char _cg81;
+char _cg84;
+char _cg78;
+char _cg82;
+char _cg87;
+char _cg85;
+char _cg102;
+char _cg107;
+char _cg92;
+char _cg97;
+char _cg101;
+char _cg94;
+char _cg105;
+char _cg98;
+char _cg103;
+char _cg112;
+char _cg110;
+char _cg115;
+char _cg118;
+char _cg122;
+char _cg116;
+char _cg126;
+char _cg119;
+char _cg124;
+char _cg132;
+char _cg130;
+char _cg135;
+char _cg139;
+char _cg143;
+char _cg136;
+char _cg145;
+char _cg140;
+char _cg149;
+char g5_e1;
+char g14_e2;
+char g23_e3;
+char g36_e4;
+char g46_e5;
+char g56_e6;
+char g66_e7;
+char g77_e8;
+char g93_e9;
+char g111_e10;
+char g131_e11;
+char g150_e12;
+char g151_fix0;
+char g151_fix1;
+char g151_fix2;
+char g151_fix3;
+char g154_e1_fix_fix;
+char g154_e1_fix;
+char g154_e1;
+char g158_e2;
+int _PRE_GO;
+void reset(){
+   _GO = 1;
+   _PRE_GO = 0;
+   PRE_g3 = 0;
+   PRE_g7 = 0;
+   PRE_g12 = 0;
+   PRE_g16 = 0;
+   PRE_g21 = 0;
+   PRE_g25 = 0;
+   PRE_g31 = 0;
+   PRE_g34 = 0;
+   PRE_g38 = 0;
+   PRE_g44 = 0;
+   PRE_g48 = 0;
+   PRE_g54 = 0;
+   PRE_g58 = 0;
+   PRE_g64 = 0;
+   PRE_g69 = 0;
+   PRE_g75 = 0;
+   PRE_g80 = 0;
+   PRE_g83 = 0;
+   PRE_g91 = 0;
+   PRE_g96 = 0;
+   PRE_g100 = 0;
+   PRE_g109 = 0;
+   PRE_g114 = 0;
+   PRE_g117 = 0;
+   PRE_g121 = 0;
+   PRE_g129 = 0;
+   PRE_g134 = 0;
+   PRE_g138 = 0;
+   PRE_g142 = 0;
+   PRE_g148 = 0;
+   PRE_g152 = 0;
+   PRE_g156 = 0;
+   return;
+}
+void tick(){
+   if(_PRE_GO == 1){
+      _GO = 0;
+   }
+   {
+      g0 = _GO;
+      g1 = g0;
+      if(g1){
+         _Assignment2_local_AVI_extend = 0;
+      }
+      g2 = g1;
+      g149 =(PRE_g148);
+      _cg149 = ERROR;
+      g147 = g1;
+      g148 =((g149&&(!(_cg149)))||g147);
+      if(g148){
+         _Assignment2_local_LRI_start = 0;
+         _Assignment2_local_LRI_ex = 0;
+         _Assignment2_local_LRI_stop = 0;
+         _Assignment2_local_URI_start = 0;
+         _Assignment2_local_URI_ex = 0;
+         _Assignment2_local_URI_stop = 0;
+         _Assignment2_local_VRP_start = 0;
+         _Assignment2_local_VRP_ex = 0;
+         _Assignment2_local_VRP_stop = 0;
+         _Assignment2_local_AVI_start = 0;
+         _Assignment2_local_AVI_ex = 0;
+         _Assignment2_local_AVI_stop = 0;
+         _Assignment2_local_AEI_start = 0;
+         _Assignment2_local_AEI_ex = 0;
+         _Assignment2_local_AEI_stop = 0;
+         _Assignment2_local_PVARP_start = 0;
+         _Assignment2_local_PVARP_ex = 0;
+         _Assignment2_local_PVARP_stop = 0;
+      }
+      g65 =(PRE_g64);
+      _cg65 = ERROR;
+      g67 =(g65&&(!(_cg65)));
+      _cg67 = VSense;
+      g155 = g0;
+      g157 =(PRE_g156);
+      g156 =(g155||g157);
+      if(g156){
+         VPase = 0;
+         APase = 0;
+      }
+      g139 =(PRE_g138);
+      _cg139 = ERROR;
+      g140 =(g139&&(!(_cg139)));
+      _cg140 = VSense;
+      g141 =(g140&&_cg140);
+      if(g141){
+         _Assignment2_local_URI_stop =(_Assignment2_local_URI_stop||1);
+         _Assignment2_local_AVI_extend = 0;
+      }
+      g49 =(PRE_g48);
+      _cg49 = ERROR;
+      g50 =(g49&&(!(_cg49)));
+      _cg50 = URITO;
+      g51 =(g50&&_cg50);
+      if(g51){
+         _Assignment2_local_URI_ex =(_Assignment2_local_URI_ex||1);
+      }
+      g145 =(g140&&(!(_cg140)));
+      _cg145 = _Assignment2_local_URI_ex;
+      g146 =(g145&&_cg145);
+      if(g146){
+         _Assignment2_local_AVI_extend = 0;
+      }
+      g17 =(PRE_g16);
+      _cg17 = ERROR;
+      g18 =(g17&&(!(_cg17)));
+      _cg18 = PVARPTO;
+      g19 =(g18&&_cg18);
+      if(g19){
+         _Assignment2_local_PVARP_ex =(_Assignment2_local_PVARP_ex||1);
+      }
+      g135 =(PRE_g134);
+      _cg135 = ERROR;
+      g136 =(g135&&(!(_cg135)));
+      _cg136 = _Assignment2_local_PVARP_ex;
+      g137 =(g136&&_cg136);
+      if(g137){
+         _Assignment2_local_AVI_extend = 1;
+      }
+      g32 =(PRE_g31);
+      _cg32 = ERROR;
+      g97 =(PRE_g96);
+      _cg97 = ERROR;
+      g98 =(g97&&(!(_cg97)));
+      _cg98 = VSense;
+      g99 =(g98&&_cg98);
+      if(g99){
+         _Assignment2_local_AVI_stop =(_Assignment2_local_AVI_stop||1);
+      }
+      g59 =(PRE_g58);
+      _cg59 = ERROR;
+      g60 =(g59&&(!(_cg59)));
+      _cg60 = LRITO;
+      g61 =(g60&&_cg60);
+      if(g61){
+         _Assignment2_local_LRI_ex =(_Assignment2_local_LRI_ex||1);
+      }
+      g118 =(PRE_g117);
+      _cg118 = ERROR;
+      g119 =(g118&&(!(_cg118)));
+      _cg119 = VSense;
+      g124 =(g119&&(!(_cg119)));
+      _cg124 = _Assignment2_local_LRI_ex;
+      g125 =(g124&&_cg124);
+      if(g125){
+         VPase =(VPase||1);
+      }
+      g103 =(g98&&(!(_cg98)));
+      _cg103 = VPase;
+      g104 =(g103&&_cg103);
+      if(g104){
+         _Assignment2_local_AVI_stop =(_Assignment2_local_AVI_stop||1);
+      }
+      g26 =(PRE_g25);
+      _cg26 = ERROR;
+      g27 =(g26&&(!(_cg26)));
+      _cg27 = _Assignment2_local_AVI_stop;
+      g28 =(g27&&(!(_cg27)));
+      _cg28 = AVITO;
+      g29 =((g32&&(!(_cg32)))||(g28&&_cg28));
+      _cg29 =(_Assignment2_local_AVI_extend == 0);
+      g30 =(g29&&_cg29);
+      if(g30){
+         _Assignment2_local_AVI_ex =(_Assignment2_local_AVI_ex||1);
+      }
+      g105 =(g103&&(!(_cg103)));
+      _cg105 = _Assignment2_local_AVI_ex;
+      g106 =(g105&&_cg105);
+      if(g106){
+         VPase =(VPase||1);
+      }
+      g73 =(g67&&(!(_cg67)));
+      _cg73 = VPase;
+      g68 =((g67&&_cg67)||(g73&&_cg73));
+      if(g68){
+         _Assignment2_local_VRP_start =(_Assignment2_local_VRP_start||1);
+      }
+      g4 =(PRE_g3);
+      _cg4 = ERROR;
+      g6 =(g4&&(!(_cg4)));
+      _cg6 = _Assignment2_local_VRP_start;
+      g8 =(PRE_g7);
+      _cg8 = ERROR;
+      g9 =(g8&&(!(_cg8)));
+      _cg9 = VRPTO;
+      g10 =(g9&&_cg9);
+      if(g10){
+         _Assignment2_local_VRP_ex =(_Assignment2_local_VRP_ex||1);
+      }
+      g3 =((g6&&(!(_cg6)))||g10||g2);
+      g5 =((g4&&_cg4)||(g8&&_cg8));
+      g7 =((g6&&_cg6)||(g9&&(!(_cg9))));
+      g11 = g1;
+      g76 =(PRE_g75);
+      _cg76 = ERROR;
+      g78 =(g76&&(!(_cg76)));
+      _cg78 = VSense;
+      g89 =(g78&&(!(_cg78)));
+      _cg89 = VPase;
+      g79 =((g89&&_cg89)||(g78&&_cg78));
+      if(g79){
+         _Assignment2_local_AEI_start =(_Assignment2_local_AEI_start||1);
+      }
+      g79b = g79;
+      if(g79b){
+         _Assignment2_local_PVARP_start =(_Assignment2_local_PVARP_start||1);
+      }
+      g13 =(PRE_g12);
+      _cg13 = ERROR;
+      g15 =(g13&&(!(_cg13)));
+      _cg15 = _Assignment2_local_PVARP_start;
+      g12 =(g19||g11||(g15&&(!(_cg15))));
+      g14 =((g17&&_cg17)||(g13&&_cg13));
+      g16 =((g18&&(!(_cg18)))||(g15&&_cg15));
+      g20 = g1;
+      g92 =(PRE_g91);
+      _cg92 = ERROR;
+      g94 =(g92&&(!(_cg92)));
+      _cg94 = ASense;
+      g84 =(PRE_g83);
+      _cg84 = ERROR;
+      g85 =(g84&&(!(_cg84)));
+      _cg85 = ASense;
+      g86 =(g85&&_cg85);
+      if(g86){
+         _Assignment2_local_AEI_stop =(_Assignment2_local_AEI_stop||1);
+      }
+      g39 =(PRE_g38);
+      _cg39 = ERROR;
+      g40 =(g39&&(!(_cg39)));
+      _cg40 = _Assignment2_local_AEI_stop;
+      g41 =(g40&&(!(_cg40)));
+      _cg41 = AEITO;
+      g42 =(g41&&_cg41);
+      if(g42){
+         _Assignment2_local_AEI_ex =(_Assignment2_local_AEI_ex||1);
+      }
+      g87 =(g85&&(!(_cg85)));
+      _cg87 = _Assignment2_local_AEI_ex;
+      g88 =(g87&&_cg87);
+      if(g88){
+         APase =(APase||1);
+      }
+      g107 =(g94&&(!(_cg94)));
+      _cg107 = APase;
+      g95 =((g94&&_cg94)||(g107&&_cg107));
+      if(g95){
+         _Assignment2_local_AVI_start =(_Assignment2_local_AVI_start||1);
+      }
+      g22 =(PRE_g21);
+      _cg22 = ERROR;
+      g24 =(g22&&(!(_cg22)));
+      _cg24 = _Assignment2_local_AVI_start;
+      g21 =(g20||(g27&&_cg27)||(g24&&(!(_cg24)))||g30);
+      g23 =((g32&&_cg32)||(g22&&_cg22)||(g26&&_cg26));
+      g25 =((g24&&_cg24)||(g28&&(!(_cg28))));
+      g31 =(g29&&(!(_cg29)));
+      g33 = g1;
+      g35 =(PRE_g34);
+      _cg35 = ERROR;
+      g37 =(g35&&(!(_cg35)));
+      _cg37 = _Assignment2_local_AEI_start;
+      g34 =((g40&&_cg40)||(g37&&(!(_cg37)))||g33||g42);
+      g36 =((g39&&_cg39)||(g35&&_cg35));
+      g38 =((g37&&_cg37)||(g41&&(!(_cg41))));
+      g43 = g1;
+      g130 =(PRE_g129);
+      _cg130 = ERROR;
+      g132 =(g130&&(!(_cg130)));
+      _cg132 = VSense;
+      g133 =(g132&&_cg132);
+      if(g133){
+         _Assignment2_local_URI_start =(_Assignment2_local_URI_start||1);
+      }
+      g143 =(PRE_g142);
+      _cg143 = ERROR;
+      g144 =(g143&&(!(_cg143)));
+      if(g144){
+         _Assignment2_local_URI_start =(_Assignment2_local_URI_start||1);
+      }
+      g45 =(PRE_g44);
+      _cg45 = ERROR;
+      g47 =(g45&&(!(_cg45)));
+      _cg47 = _Assignment2_local_URI_start;
+      g52 =(g50&&(!(_cg50)));
+      _cg52 = _Assignment2_local_URI_stop;
+      g44 =(g43||(g47&&(!(_cg47)))||g51||(g52&&_cg52));
+      g46 =((g45&&_cg45)||(g49&&_cg49));
+      g48 =((g47&&_cg47)||(g52&&(!(_cg52))));
+      g53 = g1;
+      g120 =(g119&&_cg119);
+      if(g120){
+         _Assignment2_local_LRI_stop =(_Assignment2_local_LRI_stop||1);
+      }
+      g126 =(g124&&(!(_cg124)));
+      _cg126 = VPase;
+      g127 =(g126&&_cg126);
+      if(g127){
+         _Assignment2_local_LRI_stop =(_Assignment2_local_LRI_stop||1);
+      }
+      g62 =(g60&&(!(_cg60)));
+      _cg62 = _Assignment2_local_LRI_stop;
+      g110 =(PRE_g109);
+      _cg110 = ERROR;
+      g112 =(g110&&(!(_cg110)));
+      _cg112 = VSense;
+      g113 =(g112&&_cg112);
+      if(g113){
+         _Assignment2_local_LRI_start =(_Assignment2_local_LRI_start||1);
+      }
+      g122 =(PRE_g121);
+      _cg122 = ERROR;
+      g123 =(g122&&(!(_cg122)));
+      if(g123){
+         _Assignment2_local_LRI_start =(_Assignment2_local_LRI_start||1);
+      }
+      g55 =(PRE_g54);
+      _cg55 = ERROR;
+      g57 =(g55&&(!(_cg55)));
+      _cg57 = _Assignment2_local_LRI_start;
+      g54 =(g53||(g62&&_cg62)||g61||(g57&&(!(_cg57))));
+      g56 =((g59&&_cg59)||(g55&&_cg55));
+      g58 =((g62&&(!(_cg62)))||(g57&&_cg57));
+      g63 = g1;
+      g70 =(PRE_g69);
+      _cg70 = ERROR;
+      g71 =(g70&&(!(_cg70)));
+      _cg71 = VSense;
+      g72 =(g71&&(!(_cg71)));
+      _cg72 = _Assignment2_local_VRP_ex;
+      g64 =(g63||(g72&&_cg72)||(g73&&(!(_cg73))));
+      g66 =((g65&&_cg65)||(g70&&_cg70));
+      g69 =((g72&&(!(_cg72)))||(g71&&_cg71)||g68);
+      g74 = g1;
+      g75 =(g88||(g89&&(!(_cg89)))||g74||g86);
+      g81 =(PRE_g80);
+      _cg81 = ERROR;
+      g77 =((g76&&_cg76)||(g81&&_cg81)||(g84&&_cg84));
+      g82 =(g81&&(!(_cg81)));
+      _cg82 = _Assignment2_local_PVARP_ex;
+      g80 =((g82&&(!(_cg82)))||g79b);
+      g83 =((g82&&_cg82)||(g87&&(!(_cg87))));
+      g90 = g1;
+      g101 =(PRE_g100);
+      _cg101 = ERROR;
+      g102 =(g101&&(!(_cg101)));
+      _cg102 = _Assignment2_local_PVARP_ex;
+      g91 =(g90||(g107&&(!(_cg107)))||(g102&&_cg102));
+      g93 =((g97&&_cg97)||(g92&&_cg92)||(g101&&_cg101));
+      g96 =(g95||(g105&&(!(_cg105))));
+      g100 =(g99||g104||g106||(g102&&(!(_cg102))));
+      g108 = g1;
+      g109 =((g112&&(!(_cg112)))||g108);
+      g115 =(PRE_g114);
+      _cg115 = ERROR;
+      g111 =((g118&&_cg118)||(g110&&_cg110)||(g115&&_cg115)||(g122&&_cg122));
+      g116 =(g115&&(!(_cg115)));
+      _cg116 = _Assignment2_local_VRP_ex;
+      g114 =(g123||g113||(g116&&(!(_cg116))));
+      g117 =((g116&&_cg116)||(g126&&(!(_cg126))));
+      g121 =(g125||g127||g120);
+      g128 = g1;
+      g129 =(g128||(g132&&(!(_cg132))));
+      g131 =((g143&&_cg143)||(g139&&_cg139)||(g130&&_cg130)||(g135&&_cg135));
+      g134 =(g133||(g136&&(!(_cg136)))||g144);
+      g138 =((g145&&(!(_cg145)))||g137);
+      g142 =(g146||g141);
+      g150 =(g149&&_cg149);
+      g5_e1 =(!((g4||g8)));
+      g14_e2 =(!((g13||g17)));
+      g23_e3 =(!((g22||g26||g32)));
+      g36_e4 =(!((g35||g39)));
+      g151_fix0 =((g5_e1||g5)&&(g14_e2||g14)&&(g23_e3||g23)&&(g36_e4||g36));
+      g46_e5 =(!((g45||g49)));
+      g56_e6 =(!((g55||g59)));
+      g66_e7 =(!((g65||g70)));
+      g151_fix1 =(g151_fix0&&(g46_e5||g46)&&(g56_e6||g56)&&(g66_e7||g66));
+      g77_e8 =(!((g76||g81||g84)));
+      g93_e9 =(!((g92||g97||g101)));
+      g111_e10 =(!((g110||g115||g118||g122)));
+      g131_e11 =(!((g130||g135||g139||g143)));
+      g150_e12 =(!(g149));
+      g151_fix2 =(g5||g14||g23||g36);
+      g151_fix3 =(g151_fix2||g46||g56||g66);
+      g151 =(g151_fix1&&(g77_e8||g77)&&(g93_e9||g93)&&(g111_e10||g111)&&(g131_e11||g131)&&(g150_e12||g150)&&(g151_fix3||g77||g93||g111||g131||g150));
+      g153 =(PRE_g152);
+      g152 =(g151||g153);
+      g154_e1_fix_fix =(g59||g153||g70||g97||g115||g135||g81||g118||g32||g84||g101||g139||g122);
+      g154_e1_fix =(g92||g110||g130||g8||g17||g26||g39||g49||g143||g154_e1_fix_fix);
+      g154_e1 =(!((g4||g13||g22||g35||g45||g55||g65||g76||g149||g154_e1_fix)));
+      g158_e2 =(!(g157));
+   }
+   PRE_g3 = g3;
+   PRE_g7 = g7;
+   PRE_g12 = g12;
+   PRE_g16 = g16;
+   PRE_g21 = g21;
+   PRE_g25 = g25;
+   PRE_g31 = g31;
+   PRE_g34 = g34;
+   PRE_g38 = g38;
+   PRE_g44 = g44;
+   PRE_g48 = g48;
+   PRE_g54 = g54;
+   PRE_g58 = g58;
+   PRE_g64 = g64;
+   PRE_g69 = g69;
+   PRE_g75 = g75;
+   PRE_g80 = g80;
+   PRE_g83 = g83;
+   PRE_g91 = g91;
+   PRE_g96 = g96;
+   PRE_g100 = g100;
+   PRE_g109 = g109;
+   PRE_g114 = g114;
+   PRE_g117 = g117;
+   PRE_g121 = g121;
+   PRE_g129 = g129;
+   PRE_g134 = g134;
+   PRE_g138 = g138;
+   PRE_g142 = g142;
+   PRE_g148 = g148;
+   PRE_g152 = g152;
+   PRE_g156 = g156;
+   _PRE_GO = _GO;
+   return;
+}
+
+
+
+

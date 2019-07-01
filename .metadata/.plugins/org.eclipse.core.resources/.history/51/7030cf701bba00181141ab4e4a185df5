@@ -1,0 +1,35 @@
+/*
+ * scchart.h
+ *
+ *  Created on: 16/09/2018
+ *      Author: bcri429
+ */
+#include "timeouts.h"
+
+#ifndef SCCHART_H_
+#define SCCHART_H_
+
+// Functions
+void reset();
+void tick();
+
+// Timeouts
+extern char LRITO = LRI_VALUE;
+extern char PVARPTO = PVARP_VALUE;
+extern char URITO = URI_VALUE;
+extern char AEITO = AEI_VALUE;
+extern char AVITO = AVI_VALUE;
+extern char VRPTO = VRP_VALUE;
+
+// Inputs
+extern char VSense;
+extern char ASense;
+extern char ERROR;
+
+
+// Outputs
+extern char VPase;
+extern char APase;
+
+
+#endif /* SCCHART_H_ */
